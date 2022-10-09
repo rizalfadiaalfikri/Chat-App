@@ -32,7 +32,7 @@
             android:textColor="@color/black"
             android:textStyle="bold"/>
         <EditText
-            android:id="@+id/ed_signIn_email"
+            android:id="@+id/ed_signUp_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_style"
@@ -50,7 +50,7 @@
             android:textStyle="bold"
             android:layout_marginTop="20dp"/>
         <EditText
-            android:id="@+id/ed_signIn_password"
+            android:id="@+id/ed_signUp_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_style"
@@ -61,14 +61,14 @@
             android:inputType="textPassword"
             android:hint="Password"/>
         <Button
-            android:id="@+id/btn_signIn"
+            android:id="@+id/btn_signUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:backgroundTint="@null"
             android:background="@drawable/button_style_blue"
             android:layout_below="@id/img_wallpaper"
             android:layout_marginTop="35dp"
-            android:text="Sign In"
+            android:text="Sign Up"
             android:textAllCaps="false"
             android:textColor="@color/primaryBackground"
             android:textStyle="bold"
