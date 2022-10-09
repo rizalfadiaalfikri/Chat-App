@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/menu_chat"
+        android:title="Chat"
+        android:icon="@drawable/ic_baseline_chat_24"/>
+    <item
+        android:id="@+id/menu_group"
+        android:title="Group"
+        android:icon="@drawable/ic_baseline_group_24"/>
+    <item
+        android:id="@+id/menu_contact"
+        android:title="Contact"
+        android:icon="@drawable/ic_baseline_perm_contact_calendar_24"/>
+    <item
+        android:id="@+id/menu_request"
+        android:title="Request"
+        android:icon="@drawable/ic_baseline_connect_without_contact_24"/>
 </menu>
