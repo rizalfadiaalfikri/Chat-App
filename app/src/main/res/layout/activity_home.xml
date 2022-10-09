@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Home.HomeActivity"
+    android:background="@color/white">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+        <ImageView
+            android:id="@+id/img_wallpaper"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:src="@drawable/walpaper"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="25dp"/>
+        <Button
+            android:id="@+id/btn_ToSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@null"
+            android:background="@drawable/button_style_blue"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_below="@id/img_wallpaper"
+            android:layout_marginTop="15dp"
+            android:text="Sign Up"
+            android:textAllCaps="false"
+            android:textColor="@color/primaryBackground"
+            android:textStyle="bold"
+            android:textSize="17sp"/>
+        <Button
+            android:id="@+id/btn_ToSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@null"
+            android:background="@drawable/button_style_white"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_below="@id/btn_ToSignUp"
+            android:layout_marginTop="15dp"
+            android:text="Sign In"
+            android:textAllCaps="false"
+            android:textColor="@color/primaryColor"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:layout_marginBottom="10dp"/>
+    </RelativeLayout>
+</RelativeLayout>
