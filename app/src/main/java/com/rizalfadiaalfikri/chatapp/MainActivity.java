@@ -28,7 +28,9 @@ import com.rizalfadiaalfikri.chatapp.Fragments.ChatsFragment;
 import com.rizalfadiaalfikri.chatapp.Fragments.ContatcsFragment;
 import com.rizalfadiaalfikri.chatapp.Fragments.GroupsFragment;
 import com.rizalfadiaalfikri.chatapp.Fragments.RequestsFragment;
+import com.rizalfadiaalfikri.chatapp.Home.HomeActivity;
 import com.rizalfadiaalfikri.chatapp.LoginRegister.SignInActivity;
+import com.rizalfadiaalfikri.chatapp.Toolbar.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -118,14 +120,26 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Create Groups", Toast.LENGTH_SHORT).show();
         }
         if (item.getItemId() == R.id.menu_setting) {
-            Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+            sendToSettingsActivity();
         }
-        if (item.getItemId() == R.id.menu_logout) {
-            Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
+        if (item.getItemId() == R.id.menu_signout) {
+            mAuth.signOut();
+            Toast.makeText(this, "Sign Out Successful", Toast.LENGTH_SHORT).show();
+            sendToHomeActivity();
         }
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void sendToSettingsActivity() {
+        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    private void sendToHomeActivity() {
+        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+        startActivity(intent);
     }
 
     private void verifyUserExistence() {

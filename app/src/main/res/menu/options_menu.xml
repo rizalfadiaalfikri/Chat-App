@@ -10,6 +10,6 @@
         android:id="@+id/menu_setting"
         android:title="Settings"/>
     <item
-        android:id="@+id/menu_logout"
-        android:title="Log Out"/>
+        android:id="@+id/menu_signout"
+        android:title="Sign Out"/>
 </menu>
