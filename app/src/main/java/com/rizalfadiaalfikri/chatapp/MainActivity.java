@@ -9,6 +9,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         frameLayout = findViewById(R.id.frameLayout);
         mToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
         replaceFragment(new ChatsFragment());
 
@@ -97,6 +100,32 @@ public class MainActivity extends AppCompatActivity {
             verifyUserExistence();
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menu_find_friends) {
+            Toast.makeText(this, "Find Friends", Toast.LENGTH_SHORT).show();
+        }
+        if (item.getItemId() == R.id.menu_create_group) {
+            Toast.makeText(this, "Create Groups", Toast.LENGTH_SHORT).show();
+        }
+        if (item.getItemId() == R.id.menu_setting) {
+            Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+        }
+        if (item.getItemId() == R.id.menu_logout) {
+            Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void verifyUserExistence() {
