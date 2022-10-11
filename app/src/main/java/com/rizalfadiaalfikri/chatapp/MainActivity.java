@@ -30,6 +30,7 @@ import com.rizalfadiaalfikri.chatapp.Fragments.GroupsFragment;
 import com.rizalfadiaalfikri.chatapp.Fragments.RequestsFragment;
 import com.rizalfadiaalfikri.chatapp.Home.HomeActivity;
 import com.rizalfadiaalfikri.chatapp.LoginRegister.SignInActivity;
+import com.rizalfadiaalfikri.chatapp.Toolbar.FindFriendsActivity;
 import com.rizalfadiaalfikri.chatapp.Toolbar.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.menu_find_friends) {
-            Toast.makeText(this, "Find Friends", Toast.LENGTH_SHORT).show();
+            sendToFindFriendsActivity();
         }
         if (item.getItemId() == R.id.menu_create_group) {
             Toast.makeText(this, "Create Groups", Toast.LENGTH_SHORT).show();
@@ -130,6 +131,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void sendToFindFriendsActivity() {
+        Intent intent = new Intent(MainActivity.this, FindFriendsActivity.class);
+        startActivity(intent);
     }
 
     private void sendToSettingsActivity() {
