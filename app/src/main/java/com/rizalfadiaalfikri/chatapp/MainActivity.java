@@ -1,6 +1,7 @@
 package com.rizalfadiaalfikri.chatapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -8,13 +9,23 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -118,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
             sendToFindFriendsActivity();
         }
         if (item.getItemId() == R.id.menu_create_group) {
-            Toast.makeText(this, "Create Groups", Toast.LENGTH_SHORT).show();
+            requestCreateNewGroup();
         }
         if (item.getItemId() == R.id.menu_setting) {
             sendToSettingsActivity();
@@ -131,6 +142,58 @@ public class MainActivity extends AppCompatActivity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void requestCreateNewGroup() {
+
+        View alertCustomDialog = LayoutInflater.from(MainActivity.this).inflate(R.layout.custom_dlalog, null);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+
+        alertDialog.setView(alertCustomDialog).show();
+        ImageButton btn_cancel = (ImageButton) alertCustomDialog.findViewById(R.id.btn_cancelId);
+        EditText ed_create_new_group = (EditText) alertCustomDialog.findViewById(R.id.ed_create_new_group);
+        Button btn_create_new_group = (Button) alertCustomDialog.findViewById(R.id.btn_create_new_group);
+
+        AlertDialog dialog = alertDialog.create();
+        // getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.cancel();
+            }
+        });
+
+        btn_create_new_group.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String new_group = ed_create_new_group.getText().toString();
+
+                if (TextUtils.isEmpty(new_group)) {
+                    Toast.makeText(MainActivity.this, "Please write your group name", Toast.LENGTH_SHORT).show();
+                } else {
+                    createNewGroup(new_group);
+                    dialog.cancel();
+                }
+
+            }
+        });
+    }
+
+    private void createNewGroup(String new_group) {
+        rootRef.child("Groups").child(new_group)
+                .setValue("")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(MainActivity.this, "Create new group is successful", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String error = task.getException().toString();
+                            Toast.makeText(MainActivity.this, "Error: " + error, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     private void sendToFindFriendsActivity() {

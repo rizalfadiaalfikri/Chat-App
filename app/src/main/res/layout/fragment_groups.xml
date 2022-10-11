@@ -3,15 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.GroupsFragment">
+    tools:context=".Fragments.GroupsFragment"
+    android:background="@color/primaryBackground">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/recyclerView_groupName"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"/>-->
+    <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Groups"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:gravity="center"/>
+        android:layout_height="wrap_content"/>
 
 </FrameLayout>
