@@ -84,7 +84,7 @@ public class SettingsActivity extends AppCompatActivity {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()) {
+                        if ((snapshot.exists()) && (snapshot.hasChild("name"))) {
                             String retrieveUsername = snapshot.child("name").getValue().toString();
                             String retrieveStatus = snapshot.child("status").getValue().toString();
 

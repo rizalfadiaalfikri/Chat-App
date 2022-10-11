@@ -91,13 +91,22 @@
                 android:id="@+id/txt_toSignUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sign Up "
+                android:text="Sign In "
                 android:fontFamily="monospace"
                 android:textColor="@color/primaryColor"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:layout_marginTop="20dp"/>
         </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

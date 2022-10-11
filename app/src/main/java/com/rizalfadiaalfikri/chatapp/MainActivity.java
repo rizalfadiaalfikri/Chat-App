@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         if (currentUser == null) {
-            sendToSignInActivity();
+            sendToHomeActivity();
         } else {
             verifyUserExistence();
         }
@@ -148,7 +148,12 @@ public class MainActivity extends AppCompatActivity {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Toast.makeText(MainActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+                        if (snapshot.child("name").exists()) {
+                            Toast.makeText(MainActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                            startActivity(intent);
+                        }
                     }
 
                     @Override
