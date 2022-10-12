@@ -161,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog.cancel();
+
             }
         });
 
@@ -174,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     createNewGroup(new_group);
                     dialog.cancel();
+
                 }
 
             }

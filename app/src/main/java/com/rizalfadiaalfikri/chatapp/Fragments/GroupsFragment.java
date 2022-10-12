@@ -1,8 +1,10 @@
 package com.rizalfadiaalfikri.chatapp.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,6 +26,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.rizalfadiaalfikri.chatapp.Chats.GroupChatsActivity;
 import com.rizalfadiaalfikri.chatapp.R;
 import com.rizalfadiaalfikri.chatapp.Models.*;
 
@@ -42,6 +46,8 @@ public class GroupsFragment extends Fragment {
     private ArrayAdapter<String> arrayAdapter;
     private ArrayList<String> list_of_groups = new ArrayList<>();
 
+    private Toolbar mToolbar;
+
     public GroupsFragment() {
         // Required empty public constructor
     }
@@ -58,6 +64,9 @@ public class GroupsFragment extends Fragment {
 
 //        recyclerView_groupName = view.findViewById(R.id.recyclerView_groupName);
 //        recyclerView_groupName.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        mToolbar = view.findViewById(R.id.group_app_bar);
+
 
         listView = view.findViewById(R.id.listView);
         arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, list_of_groups);
@@ -83,7 +92,16 @@ public class GroupsFragment extends Fragment {
             }
 
         });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String currentGroupName = adapterView.getItemAtPosition(i).toString();
 
+                Intent intent = new Intent(getContext(), GroupChatsActivity.class);
+                intent.putExtra("groupName", currentGroupName);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
