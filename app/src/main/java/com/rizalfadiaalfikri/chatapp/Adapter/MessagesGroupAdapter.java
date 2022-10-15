@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -64,9 +65,11 @@ public class MessagesGroupAdapter extends RecyclerView.Adapter<MessagesGroupAdap
         holder.receiver_messageList.setVisibility(View.INVISIBLE);
         holder.profileImage.setVisibility(View.INVISIBLE);
         holder.sender_messageList.setVisibility(View.INVISIBLE);
+        holder.txt_receiver_name.setVisibility(View.INVISIBLE);
 
         if (fromUserID.equals(messageSenderId)) {
             holder.sender_messageList.setVisibility(View.VISIBLE);
+            holder.cardView.setVisibility(View.INVISIBLE);
 
             holder.sender_messageList.setBackgroundResource(R.drawable.sender_message_layout);
             holder.sender_messageList.setTextColor(Color.BLACK);
@@ -75,10 +78,14 @@ public class MessagesGroupAdapter extends RecyclerView.Adapter<MessagesGroupAdap
 
             holder.profileImage.setVisibility(View.VISIBLE);
             holder.receiver_messageList.setVisibility(View.VISIBLE);
+            holder.txt_receiver_name.setVisibility(View.VISIBLE);
 
             holder.receiver_messageList.setBackgroundResource(R.drawable.receiver_message_layout);
             holder.receiver_messageList.setTextColor(Color.BLACK);
             holder.receiver_messageList.setText(messages.getMessage());
+            holder.txt_receiver_name.setBackgroundResource(R.drawable.receiver_message_layout);
+            holder.txt_receiver_name.setTextColor(Color.BLUE);
+            holder.txt_receiver_name.setText(messages.getName());
         }
     }
 
@@ -89,14 +96,16 @@ public class MessagesGroupAdapter extends RecyclerView.Adapter<MessagesGroupAdap
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         CircleImageView profileImage;
-        TextView receiver_messageList, sender_messageList;
+        CardView cardView;
+        TextView receiver_messageList, sender_messageList, txt_receiver_name;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             profileImage = itemView.findViewById(R.id.message_profile_image);
             receiver_messageList = itemView.findViewById(R.id.txt_receiver_message);
             sender_messageList = itemView.findViewById(R.id.txt_sender_message);
-
+            txt_receiver_name = itemView.findViewById(R.id.txt_receiver_name);
+            cardView = itemView.findViewById(R.id.cardView);
         }
     }
 }
