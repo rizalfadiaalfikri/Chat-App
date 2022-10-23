@@ -28,7 +28,7 @@ public class ProfileActivity extends AppCompatActivity {
     private Button btn_profile_sendMessage, btn_profile_cancelChatRequest;
 
     private FirebaseAuth mAuth;
-    private DatabaseReference user_ref, chatRequestRef, ContactsRef;
+    private DatabaseReference user_ref, chatRequestRef, contactsRef;
 
     private String user_id, current_state, current_user_id;
 
@@ -40,6 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         user_ref = FirebaseDatabase.getInstance().getReference().child("Users");
         chatRequestRef = FirebaseDatabase.getInstance().getReference().child("Request");
+        contactsRef = FirebaseDatabase.getInstance().getReference().child("Contacts");
 
 
         user_id = getIntent().getStringExtra("user_id");
@@ -116,7 +117,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                     }
                 });
-        if (!current_state.equals(user_id)) {
+        if (!current_user_id.equals(user_id)) {
             btn_profile_sendMessage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -131,12 +132,61 @@ public class ProfileActivity extends AppCompatActivity {
                     if (current_state.equals("request_received")) {
                         acceptRequest();
                     }
+                    if (current_state.equals("friends")) {
+
+                    }
                 }
             });
+        } else {
+            btn_profile_sendMessage.setVisibility(View.INVISIBLE);
         }
     }
 
     private void acceptRequest() {
+        contactsRef.child(current_user_id)
+                .child(user_id)
+                .child("Contacts")
+                .setValue("saved")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            contactsRef.child(user_id)
+                                    .child(current_user_id)
+                                    .child("Contacts")
+                                    .setValue("Saved")
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                             chatRequestRef.child(current_user_id)
+                                                     .child(user_id)
+                                                     .removeValue()
+                                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                         @Override
+                                                         public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                chatRequestRef.child(user_id)
+                                                                        .child(current_user_id)
+                                                                        .removeValue()
+                                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                            @Override
+                                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                                btn_profile_sendMessage.setEnabled(true);
+                                                                                current_state = "friends";
+                                                                                btn_profile_sendMessage.setText("Remove This Contact");
+
+                                                                                btn_profile_cancelChatRequest.setVisibility(View.INVISIBLE);
+                                                                                btn_profile_cancelChatRequest.setEnabled(false);
+                                                                            }
+                                                                        });
+                                                            }
+                                                         }
+                                                     });
+                                        }
+                                    });
+                        }
+                    }
+                });
 
     }
 
